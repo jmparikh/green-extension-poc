@@ -144,3 +144,7 @@ But, what if we just want to use Extended Echo Reply to carry only the Environme
 * Pleas ignore the checksum errors, as this can be easily taken care of.
 
 ---
+
+## Prerequisite
+
+* Have phython3, scapy, sudo access, some patience and blessings from the networking gods
