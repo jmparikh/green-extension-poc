@@ -10,7 +10,7 @@ The receiver must always be started first, and the sender connects to it afterwa
 ## Overview
 
 This is a PoC to showoff an implementation for the https://datatracker.ietf.org/doc/draft-pignataro-icmp-enviro-info/.
-It makes use of Loopback interface, Python (scapy) and the Extended Echo Request/Response (defined in RFC 8335) to request and carry the information
+It makes use of Loopback interface, Python (scapy) and the Extended Echo Request/Reply (defined in RFC 8335) to request and carry the information
 
 We have two main components:
 * **Receiver (receiver.py)** — waits for incoming data.
@@ -23,17 +23,17 @@ We have two main components:
   Simply sends an ICMP Extended Echo Request to the receiver.py
 
 Example:
-- If probeFlag==1 and greenFlag==1, both the Interface Identification Object and Environmental Information Object are included in the ICMP Extended Echo Response.
-- If probeFlag==1 and greenFlag==0, only the Interface Identification Object is included in the ICMP Extended Echo Response.
+- If probeFlag==1 and greenFlag==1, both the Interface Identification Object and Environmental Information Object are included in the ICMP Extended Echo Reply.
+- If probeFlag==1 and greenFlag==0, only the Interface Identification Object is included in the ICMP Extended Echo Reply.
 
 ---
 ## What are we showing off?
 
 * That implementing this is possible.
-* With the flags, we can prove that the control to use the extensions defined in this draft, is upto the network administrator, i.e. they can set the flag to 0 to not include the Environmental Information Objects in the Extended Echo Response.
+* With the flags, we can prove that the control to use the extensions defined in this draft, is upto the network administrator, i.e. they can set the flag to 0 to not include the Environmental Information Objects in the Extended Echo Reply.
 * The extensions defined in this draft are backwards compatible.
 * They are able to inter-op.
-* **We are also taking a step ahead and showing off that it is also possible to use Extended Echo Response for other payloads (Extensions) as well (more about it below)**
+* **We are also taking a step ahead and showing off that it is also possible to use Extended Echo Reply for other payloads (Extensions) as well (more about it here [Extending the ICMP Extended Echo Reply to allow carrying only other objects](#extending-the-icmp-extended-echo-reply-to-allow-carrying-only-other-objects))**
 
 ---
 
@@ -79,7 +79,7 @@ Sent 1 packets.
 [A] Payload: b' \x00\xcb\xed\x00\x0c\x03\x03\x00\x01\x04\x00\n\x00\x03\x02\x00\x0c\t\x01\x00\x00\x00d\x00\x00\x00PKv\xf4f\x00\x00\x00\x00\xdf\xbc\t\x00\x00\x00\x00\x00\x1c\x1d\x1e\x1f !"#$%&\'()*+,-./01234567'
 ```
 
-Receiver when gets the Extended Echo Request, will formulate an Extended Echo Response and will attach the Extensions based on the flag values:
+Receiver when gets the Extended Echo Request, will formulate an Extended Echo Reply and will attach the Extensions based on the flag values:
 ```
 host$ sudo python3 receiver.py --probeFlag=1 --greenFlag=1
 [B] Waiting for ICMP Echo Requests...
@@ -111,12 +111,12 @@ Sent 1 packets.
 
 ---
 
-## Extending the ICMP Extended Echo Response to also allow carrying only other objects:
+## Extending the ICMP Extended Echo Reply to allow carrying only other objects:
 
-Presently, ICMP Extended Echo Response is supposed to carry the Interface Identification Object. Extensions defined in this draft are able to be piggyback on the Extended Echo Response.
+Presently, ICMP Extended Echo Reply is supposed to carry the Interface Identification Object. Extensions defined in this draft are able to be piggyback on the Extended Echo Reply.
 
-But, what if we just want to use Extended Echo Response to carry only the Environmental Information Objects or any other future extension objects?
-- Hence we took experimental liberty to use the "State" field in the ICMP Extended Echo Response:
+But, what if we just want to use Extended Echo Reply to carry only the Environmental Information Objects or any other future extension objects?
+- Hence we took experimental liberty to use the "State" field in the ICMP Extended Echo Reply:
 
       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
       |     Type      |     Code      |          Checksum             |
@@ -127,7 +127,7 @@ But, what if we just want to use Extended Echo Response to carry only the Enviro
       +-+-+-+-+-
       |   [Data...]
 - And set it to "7" an unused code.
-- With this, we can signal the device to use this code, when the PROBE functionality is turned off, but we need Extended Response to send other data.
+- With this, we can signal the device to use this code, when the PROBE functionality is turned off, but we need Extended Reply to send other data.
 - This has been proved in this test:
       ```bash
       sudo python3 receiver.py --probeFlag=0 --greenFlag=1
