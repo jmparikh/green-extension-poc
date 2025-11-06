@@ -97,13 +97,13 @@ Sent 1 packets.
 
 ## Example of using the scripts:
 
-- Request:
+- <a name="request"></a>Request:
 ![request.png](assets/request.png) "Request: via ICMP Extended Echo Request"
 
-- Response: (probeFlag == 1 and greenFlag==1)
+- <a name="response_pF1-gF1"></a>Response: (probeFlag == 1 and greenFlag==1)
 ![response (pF1, gF1).png](assets/response_pF1-gF1.png) "Response: with ICMP Extended Echo Reply [with Interface Identification and Environmental Information Object]"
 
-- Response: (probeFlag == 1 and greenFlag==0)
+- <a name="response_pF1-gF0"></a>Response: (probeFlag == 1 and greenFlag==0)
 ![response (pF1, gF1).png](assets/response_pF1-gF0.png) "Response: with ICMP Extended Echo Reply [with only Interface Identification Object]"
 
 - <a name="response_pF0-gF1"></a>Response: (probeFlag == 0 and greenFlag==1)
@@ -141,5 +141,6 @@ But, what if we just want to use Extended Echo Reply to carry only the Environme
 * The **Receiver must start first**; otherwise, the Sender will fail to connect.
 * You can modify flags as necessary.
 * We use the lo interface (so we may see DUP responses)
+* Pleas ignore the checksum errors, as this can be easily taken care of.
 
 ---
