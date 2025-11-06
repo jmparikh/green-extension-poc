@@ -95,6 +95,30 @@ Sent 1 packets.
 
 ---
 
+## Extending the ICMP Extended Echo Response to also allow carrying only other objects:
+
+Presently, ICMP Extended Echo Response is supposed to carry the Interface Identification Object. Extensions defined in this draft are able to be piggyback on the Extended Echo Response.
+
+But, what if we just want to use Extended Echo Response to carry only the Environmental Information Objects or any other future extension objects?
+- Hence we took experimental liberty to use the "State" field in the ICMP Extended Echo Response:
+
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |     Type      |     Code      |          Checksum             |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |           Identifier          |Sequence Number|State|Res|A|4|6|
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |   ICMP Extension Structure
+      +-+-+-+-+-
+      |   [Data...]
+- And set it to "7" an unused code.
+- With this, we can signal the device to use this code, when the PROBE functionality is turned off, but we need Extended Response to send other data.
+- This has been proved in this test:
+      ```bash
+      sudo python3 receiver.py --probeFlag=0 --greenFlag=1
+      ``` (probeFlag set to 0, but greenFlag set to 1)
+
+---
+
 ## Notes
 
 * The **Receiver must start first**; otherwise, the Sender will fail to connect.
