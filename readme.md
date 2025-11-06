@@ -95,6 +95,17 @@ Sent 1 packets.
 
 ---
 
+## Example of using the scripts:
+
+- Request:
+![alt text]([https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png](https://github.com/jmparikh/green-extension-poc/blob/main/assets/request.png) "Request: via ICMP Extended Echo Request")
+
+- Response: (probeFlag == 1 and greenFlag==1)
+- 
+
+
+---
+
 ## Extending the ICMP Extended Echo Response to also allow carrying only other objects:
 
 Presently, ICMP Extended Echo Response is supposed to carry the Interface Identification Object. Extensions defined in this draft are able to be piggyback on the Extended Echo Response.
