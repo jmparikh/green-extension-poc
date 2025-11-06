@@ -98,7 +98,7 @@ Sent 1 packets.
 ## Example of using the scripts:
 
 - Request:
-![alt text]([https://github.com/jmparikh/green-extension-poc/blob/main/assets/request.png](https://github.com/jmparikh/green-extension-poc/blob/main/assets/request.png) "Request: via ICMP Extended Echo Request")
+![alt text]([Request](assets/request.png) "Request: via ICMP Extended Echo Request")
 
 - Response: (probeFlag == 1 and greenFlag==1)
 - 
