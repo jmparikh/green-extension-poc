@@ -14,7 +14,7 @@ hex_str = "20 00 cb ed 00 0c 03 03 00 01 04 00 0a 00 03 02"
     #                   |---------| |---------------------| This is Object H and P
     #0010   66 f4 6f 53 00 01 ad b3
 rawpayload = bytes.fromhex(hex_str)
-pkt = Ether(src="aa:aa:aa:aa:aa:00", dst="aa:aa:aa:aa:aa:aa")/IP(src="10.10.10.1",dst=target_ip)/ICMP(type=42, ext=ICMPExtension_Header())/Raw(load=rawpayload)
+pkt = Ether(src="ca:fe:c0:ff:ee:00", dst="ca:fe:c0:ff:ee:11")/IP(src="10.10.10.1",dst=target_ip)/ICMP(type=42, ext=ICMPExtension_Header())/Raw(load=rawpayload)
 print(f"[A] Sending packet: {pkt.summary()}")
 
 # Send packet to B
