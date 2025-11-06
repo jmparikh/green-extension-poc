@@ -106,8 +106,9 @@ Sent 1 packets.
 - Response: (probeFlag == 1 and greenFlag==0)
 ![response (pF1, gF1).png](assets/response_pF1-gF0.png) "Response: with ICMP Extended Echo Reply [with only Interface Identification Object]"
 
-- Response: (probeFlag == 0 and greenFlag==1)
+- <a name="response_pF0-gF1"></a>Response: (probeFlag == 0 and greenFlag==1)
 ![response (pF1, gF1).png](assets/response_pF0-gF1.png) "Response: with ICMP Extended Echo Reply [with only Environmental Information Object]"
+This is in support for [Extending the ICMP Extended Echo Reply to allow carrying only other objects](#extending-the-icmp-extended-echo-reply-to-allow-carrying-only-other-objects)
 
 ---
 
@@ -132,7 +133,7 @@ But, what if we just want to use Extended Echo Reply to carry only the Environme
       ```bash
       sudo python3 receiver.py --probeFlag=0 --greenFlag=1
       ``` (probeFlag set to 0, but greenFlag set to 1)
-
+- Example for this in action can be found here [response_pF0-gF1](#response_pF0-gF1)
 ---
 
 ## Notes
