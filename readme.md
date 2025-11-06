@@ -103,6 +103,11 @@ Sent 1 packets.
 - Response: (probeFlag == 1 and greenFlag==1)
 ![response (pF1, gF1).png](assets/response_pF1-gF1.png) "Response: with ICMP Extended Echo Reply [with Interface Identification and Environmental Information Object]"
 
+- Response: (probeFlag == 1 and greenFlag==0)
+![response (pF1, gF1).png](assets/response_pF1-gF0.png) "Response: with ICMP Extended Echo Reply [with only Interface Identification Object]"
+
+- Response: (probeFlag == 0 and greenFlag==1)
+![response (pF1, gF1).png](assets/response_pF0-gF1.png) "Response: with ICMP Extended Echo Reply [with only Environmental Information Object]"
 
 ---
 
