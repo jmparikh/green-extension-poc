@@ -98,10 +98,10 @@ Sent 1 packets.
 ## Example of using the scripts:
 
 - Request:
-![request.png](assets/request.png) "Request: via ICMP Extended Echo Request")
+![request.png](assets/request.png) "Request: via ICMP Extended Echo Request"
 
 - Response: (probeFlag == 1 and greenFlag==1)
-- 
+![response (pF1, gF1).png](assets/response (pF1, gF1).png) "Response: with ICMP Extended Echo Reply [with Interface Identification and Environmental Information Object]"
 
 
 ---
