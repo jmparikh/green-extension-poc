@@ -23,8 +23,8 @@ We have two main components:
   Simply sends an ICMP Extended Echo Request to the receiver.py
 
 Example:
-- If probeFlag==1 and greenFlag==1, both the Interface Identification Object and Environmental Information Object are included in the ICMP Extended Echo Reply.
-- If probeFlag==1 and greenFlag==0, only the Interface Identification Object is included in the ICMP Extended Echo Reply.
+- If `probeFlag==1` and `greenFlag==1`, both the Interface Identification Object and Environmental Information Object are included in the ICMP Extended Echo Reply.
+- If `probeFlag==1` and `greenFlag==0`, only the Interface Identification Object is included in the ICMP Extended Echo Reply.
 
 ---
 ## What are we showing off?
@@ -100,13 +100,13 @@ Sent 1 packets.
 - <a name="request"></a>Request:
 ![request.png](assets/request.png) "Request: via ICMP Extended Echo Request"
 
-- <a name="response_pF1-gF1"></a>Response: (probeFlag == 1 and greenFlag==1)
+- <a name="response_pF1-gF1"></a>Response: (`probeFlag == 1` and `greenFlag==1`)
 ![response (pF1, gF1).png](assets/response_pF1-gF1.png) "Response: with ICMP Extended Echo Reply [with Interface Identification and Environmental Information Object]"
 
-- <a name="response_pF1-gF0"></a>Response: (probeFlag == 1 and greenFlag==0)
+- <a name="response_pF1-gF0"></a>Response: (`probeFlag == 1` and `greenFlag==0`)
 ![response (pF1, gF1).png](assets/response_pF1-gF0.png) "Response: with ICMP Extended Echo Reply [with only Interface Identification Object]"
 
-- <a name="response_pF0-gF1"></a>Response: (probeFlag == 0 and greenFlag==1)
+- <a name="response_pF0-gF1"></a>Response: (`probeFlag == 0` and `greenFlag==1`)
 ![response (pF1, gF1).png](assets/response_pF0-gF1.png) "Response: with ICMP Extended Echo Reply [with only Environmental Information Object]"
 This is in support for [Extending the ICMP Extended Echo Reply to allow carrying only other objects](#extending-the-icmp-extended-echo-reply-to-allow-carrying-only-other-objects)
 
@@ -132,7 +132,7 @@ But, what if we just want to use Extended Echo Reply to carry only the Environme
 - This has been proved in this test:
       ```bash
       sudo python3 receiver.py --probeFlag=0 --greenFlag=1
-      ``` (probeFlag set to 0, but greenFlag set to 1)
+      ``` (`probeFlag` set to 0, but `greenFlag` set to 1)
 - Example for this in action can be found here [response_pF0-gF1](#response_pF0-gF1)
 ---
 
@@ -145,6 +145,6 @@ But, what if we just want to use Extended Echo Reply to carry only the Environme
 
 ---
 
-## Prerequisite
+## Prerequisites
 
 * Have phython3, scapy, sudo access, some patience and blessings from the networking gods
