@@ -4,6 +4,7 @@
 
 This project demonstrates a simple message exchange between a **Receiver (Rx)** and a **Sender (Tx)**.
 The receiver must always be started first, and the sender connects to it afterwards.
+NOTE: This is supported on Linux hosts, only, for now.
 
 ---
 
