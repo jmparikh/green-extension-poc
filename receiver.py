@@ -2,12 +2,12 @@ from scapy.all import *
 from scapy.layers.inet import *
 import argparse
 
-iface = "lo"
+iface = "lo0"
 listen_ip = "10.10.10.2"
 
 #CLI argument parser
 parser = argparse.ArgumentParser(description="Example CLI input script")
-parser.add_argument("-pf", "--probeFlag", type=int, help="Include Interface Identification Object in the response", required=True)
+parser.add_argument("-pf", "--interfaceIdentifyFlag", type=int, help="Include Interface Identification Object in the response", required=True)
 parser.add_argument("-gf", "--greenFlag", type=int, help="Include Environmental Information Object in the response", required=True)
 args = parser.parse_args()
 
@@ -22,7 +22,7 @@ def handle_pkt(pkt):
         print(f"[B] Received ICMP: {payload}")
 
         # Decide payload based on flags
-        if (args.greenFlag == 1 and args.probeFlag == 1):
+        if (args.greenFlag == 1 and args.interfaceIdentifyFlag == 1):
             extended_echo_reply_header = "2b 00 62 50 00 00 00 06"
             extension_header = "2000dcf4"
             node_power_object = "000C090100000064000000504b76f46600000000dfbc0900000000001c1d1e1f202122232425262728292a2b2c2d2e2f3031323334353637"
@@ -57,7 +57,7 @@ def handle_pkt(pkt):
                 Raw(load=bytes.fromhex(extended_echo_reply_header)+rawpayload)
 
         sendp(reply, iface=iface)
-        if args.probeFlag == 1:
+        if args.interfaceIdentifyFlag == 1:
             print("[B] Sent ICMP Echo Reply with modified payload")
         else:
             print("[B] Sent pure ICMP Echo Reply")

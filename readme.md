@@ -18,15 +18,15 @@ We have two main components:
 * **Receiver (receiver.py)** — waits for incoming data.
   Requires **two arguments**: (0 or 1)
 
-  1. `--probeFlag` → Tells the receiver to include the Interface Identification Object in the response or not
+  1. `--interfaceIdentifyFlag` → Tells the receiver to include the Interface Identification Object in the response or not
   2. `--greenFlag` → Tells the receiver to include the Environmental Information Object in the response or not
 
 * **Sender (sender.py)** — connects to the receiver and sends data.
   Simply sends an ICMP Extended Echo Request to the receiver.py
 
 Example:
-- If `probeFlag==1` and `greenFlag==1`, both the Interface Identification Object and Environmental Information Object are included in the ICMP Extended Echo Reply.
-- If `probeFlag==1` and `greenFlag==0`, only the Interface Identification Object is included in the ICMP Extended Echo Reply.
+- If `interfaceIdentifyFlag==1` and `greenFlag==1`, both the Interface Identification Object and Environmental Information Object are included in the ICMP Extended Echo Reply.
+- If `interfaceIdentifyFlag==1` and `greenFlag==0`, only the Interface Identification Object is included in the ICMP Extended Echo Reply.
 
 ---
 ## What are we showing off?
@@ -46,7 +46,7 @@ Example:
 Run the receiver first:
 
 ```bash
-<sudo> python3 receiver.py --probeFlag=1 --greenFlag=1
+<sudo> python3 receiver.py --interfaceIdentifyFlag=1 --greenFlag=1
 ```
 
 This starts the program listening on the Linux Loopback interface.
@@ -54,7 +54,7 @@ This starts the program listening on the Linux Loopback interface.
 You should see:
 
 ```
-host$ sudo python3 receiver.py --probeFlag=1 --greenFlag=1
+host$ sudo python3 receiver.py --interfaceIdentifyFlag=1 --greenFlag=1
 [B] Waiting for ICMP Echo Requests...
 ```
 
@@ -83,7 +83,7 @@ Sent 1 packets.
 
 Receiver when gets the Extended Echo Request, will formulate an Extended Echo Reply and will attach the Extensions based on the flag values:
 ```
-host$ sudo python3 receiver.py --probeFlag=1 --greenFlag=1
+host$ sudo python3 receiver.py --interfaceIdentifyFlag=1 --greenFlag=1
 [B] Waiting for ICMP Echo Requests...
 [B] Received ICMP: b' \x00\xcb\xed\x00\x0c\x03\x03\x00\x01\x04\x00\n\x00\x03\x02'
 .
@@ -102,13 +102,13 @@ Sent 1 packets.
 - <a name="request"></a>Request:
 ![request.png](assets/request.png) "Request: via ICMP Extended Echo Request"
 
-- <a name="response_pF1-gF1"></a>Response: (`probeFlag == 1` and `greenFlag==1`)
+- <a name="response_pF1-gF1"></a>Response: (`interfaceIdentifyFlag == 1` and `greenFlag==1`)
 ![response (pF1, gF1).png](assets/response_pF1-gF1.png) "Response: with ICMP Extended Echo Reply [with Interface Identification and Environmental Information Object]"
 
-- <a name="response_pF1-gF0"></a>Response: (`probeFlag == 1` and `greenFlag==0`)
+- <a name="response_pF1-gF0"></a>Response: (`interfaceIdentifyFlag == 1` and `greenFlag==0`)
 ![response (pF1, gF1).png](assets/response_pF1-gF0.png) "Response: with ICMP Extended Echo Reply [with only Interface Identification Object]"
 
-- <a name="response_pF0-gF1"></a>Response: (`probeFlag == 0` and `greenFlag==1`)
+- <a name="response_pF0-gF1"></a>Response: (`interfaceIdentifyFlag == 0` and `greenFlag==1`)
 ![response (pF1, gF1).png](assets/response_pF0-gF1.png) "Response: with ICMP Extended Echo Reply [with only Environmental Information Object]"
 This is in support for [Extending the ICMP Extended Echo Reply to allow carrying only other objects](#extending-the-icmp-extended-echo-reply-to-allow-carrying-only-other-objects)
 
@@ -133,8 +133,8 @@ But, what if we just want to use Extended Echo Reply to carry only the Environme
 - With this, we can signal the device to use this code, when the PROBE functionality is turned off, but we need Extended Reply to send other data.
 - This has been proved in this test:
       ```bash
-      sudo python3 receiver.py --probeFlag=0 --greenFlag=1
-      ``` (`probeFlag` set to 0, but `greenFlag` set to 1)
+      sudo python3 receiver.py --interfaceIdentifyFlag=0 --greenFlag=1
+      ``` (`interfaceIdentifyFlag` set to 0, but `greenFlag` set to 1)
 - Example for this in action can be found here [response_pF0-gF1](#response_pF0-gF1)
 ---
 

@@ -2,7 +2,7 @@ from scapy.all import *
 from scapy.layers.inet import *
 
 # Use loopback interface
-iface = "lo"
+iface = "lo0"
 #target_ip = "127.0.0.1"
 target_ip = "10.10.10.2"
 
