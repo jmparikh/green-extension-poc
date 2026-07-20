@@ -116,7 +116,7 @@ This is in support for [Extending the ICMP Extended Echo Reply to allow carrying
 
 ## Extending the ICMP Extended Echo Reply to allow carrying only other objects:
 
-Presently, ICMP Extended Echo Reply is supposed to carry the Interface Identification Object. Extensions defined in this draft are able to be piggyback on the Extended Echo Reply.
+Presently, ICMP Extended Echo Reply is supposed to carry the Interface Identification Object. Extensions defined in this draft can be piggybacked after the Interface Identification Object in the Extended Echo Reply.
 
 But, what if we just want to use Extended Echo Reply to carry only the Environmental Information Objects or any other future extension objects?
 - Hence we took experimental liberty to use the "State" field in the ICMP Extended Echo Reply:
@@ -136,6 +136,8 @@ But, what if we just want to use Extended Echo Reply to carry only the Environme
       sudo python3 receiver.py --interfaceIdentifyFlag=0 --greenFlag=1
       ``` (`interfaceIdentifyFlag` set to 0, but `greenFlag` set to 1)
 - Example for this in action can be found here [response_pF0-gF1](#response_pF0-gF1)
+  
+- Note: We could also use the "Res" field (instead of the "State" field) to use the Extended Echo Reply to to signal that the reply carries only the Environmental Information Object, without an Interface Identification Object. (This PoC uses the "State" field, but can also show off using the "Res" field, if needed)
 ---
 
 ## Notes
